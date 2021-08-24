@@ -1,0 +1,26 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: simple-nginx
+  labels:
+    app: simple-nginx
+    app.kubernetes.io/component: simple-nginx
+    app.kubernetes.io/instance: simple-nginx
+    app.kubernetes.io/part-of: poc-cicd
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: a9cea7709a69675d7f87a4f26010cf85e8f500d5
+      annotations:
+        iconClass: nginx
+        openshift.io/display-name: nginx
+        tags: 'nginx,hidden'
+        version: '5'       
+      from:
+        kind: DockerImage
+        name: 'ocpregistry.azurecr.io/simple-nginx:a9cea7709a69675d7f87a4f26010cf85e8f500d5'
+      generation: 2
+      importPolicy: {}
+      referencePolicy:
+        type: Local

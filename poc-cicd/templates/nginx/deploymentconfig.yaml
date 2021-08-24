@@ -1,0 +1,58 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: simple-nginx
+  labels:
+    app: simple-nginx
+    app.kubernetes.io/component: simple-nginx
+    app.kubernetes.io/instance: simple-nginx
+    app.kubernetes.io/part-of: poc-cicd
+    app.openshift.io/runtime: nginx
+    app.openshift.io/runtime-namespace: poc-intermedia
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - simple-nginx
+        from:
+          kind: ImageStreamTag
+          name: 'simple-nginx:a9cea7709a69675d7f87a4f26010cf85e8f500d5'
+    - type: ConfigChange
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    app: simple-nginx
+    deploymentconfig: simple-nginx
+  template:
+    metadata:
+      labels:
+        app: simple-nginx
+        deploymentconfig: simple-nginx
+    spec:
+      containers:
+        - name: simple-nginx
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler

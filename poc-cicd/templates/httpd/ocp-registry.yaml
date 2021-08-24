@@ -1,0 +1,8 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: ocpregistry-private
+data:
+  .dockerconfigjson: >-
+    eyJhdXRocyI6eyJvY3ByZWdpc3RyeS5henVyZWNyLmlvIjp7InVzZXJuYW1lIjoib2NwcmVnaXN0cnkiLCJwYXNzd29yZCI6IkJhYj1ab0M5PW11UDM1clRFRnpTTWYrbnNNNExpWFMyIiwiYXV0aCI6ImIyTndjbVZuYVhOMGNuazZRbUZpUFZwdlF6azliWFZRTXpWeVZFVkdlbE5OWml0dWMwMDBUR2xZVXpJPSIsImVtYWlsIjoiIn19fQ==
+type: kubernetes.io/dockerconfigjson

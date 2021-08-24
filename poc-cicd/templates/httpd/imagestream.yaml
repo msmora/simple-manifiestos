@@ -1,0 +1,26 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: simple-httpd
+  labels:
+    app: simple-httpd
+    app.kubernetes.io/component: simple-httpd
+    app.kubernetes.io/instance: simple-httpd
+    app.kubernetes.io/part-of: poc-cicd
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: a9cea7709a69675d7f87a4f26010cf85e8f500d5
+      annotations:
+        iconClass: apache
+        openshift.io/display-name: httpd
+        tags: 'httpd,hidden'
+        version: '5' 
+      from:
+        kind: DockerImage
+        name: 'ocpregistry.azurecr.io/simple-httpd:a9cea7709a69675d7f87a4f26010cf85e8f500d5'
+      generation: 2
+      importPolicy: {}
+      referencePolicy:
+        type: Local

@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: simple-nginx
+  labels:
+    app: simple-nginx
+    app.kubernetes.io/component: simple-nginx
+    app.kubernetes.io/instance: simple-nginx
+    app.kubernetes.io/part-of: poc-cicd
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: simple-nginx
+    deploymentconfig: simple-nginx
+  sessionAffinity: None

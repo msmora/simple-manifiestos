@@ -1,0 +1,18 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: simple-nginx
+  labels:
+    app: simple-nginx
+    app.kubernetes.io/component: simple-nginx
+    app.kubernetes.io/instance: simple-nginx
+    app.kubernetes.io/part-of: poc-cicd
+    app.openshift.io/runtime-version: a9cea7709a69675d7f87a4f26010cf85e8f500d5
+spec:
+  to:
+    kind: Service
+    name: simple-nginx
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None
