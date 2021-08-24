@@ -11,7 +11,7 @@ spec:
   lookupPolicy:
     local: false
   tags:
-    - name: a9cea7709a69675d7f87a4f26010cf85e8f500d5
+    - name: {{ .Chart.Imagehttpd }}
       annotations:
         iconClass: apache
         openshift.io/display-name: httpd
@@ -19,7 +19,7 @@ spec:
         version: '5' 
       from:
         kind: DockerImage
-        name: 'ocpregistry.azurecr.io/simple-httpd:a9cea7709a69675d7f87a4f26010cf85e8f500d5'
+        name: 'ocpregistry.azurecr.io/simple-httpd:{{ .Chart.Imagehttpd }}'
       generation: 2
       importPolicy: {}
       referencePolicy:
