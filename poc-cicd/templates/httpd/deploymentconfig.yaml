@@ -31,7 +31,7 @@ spec:
           - simple-httpd
         from:
           kind: ImageStreamTag
-          name: 'simple-httpd:a9cea7709a69675d7f87a4f26010cf85e8f500d5'
+          name: 'simple-httpd:{{ .Chart.Imagehttpd }}'
     - type: ConfigChange
   replicas: 2
   revisionHistoryLimit: 10
